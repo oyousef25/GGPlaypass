@@ -1,0 +1,14 @@
+/* Countdown.css */
+.countdown-unit {
+    background-color: #444; /* Dark background for each unit */
+    color: #fff; /* White text color */
+    padding: 20px; /* Padding inside each unit */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center the text */
+    min-width: 80px; /* Minimum width for each unit */
+    transition: transform 0.3s; /* Animation effect */
+}
+
+.countdown-unit:hover {
+    transform: scale(1.1); /* Scale effect on hover */
+}
