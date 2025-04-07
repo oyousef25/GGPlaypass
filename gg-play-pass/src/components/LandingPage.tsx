@@ -35,7 +35,6 @@ const LandingPage = () => {
         <div style={{ position: 'relative', zIndex: 2, top: '50%', transform: 'translateY(-50%)' }}>
           <h1 className="display-4">LEVEL UP, EARN CRYPTO.</h1>
           <h2 className="lead">JOIN THE UNDERGROUND</h2>
-          <Countdown />
           <div className="my-4">
             <button className="btn btn-primary btn-lg" onClick={openModal}>
               Subscribe 🚀
