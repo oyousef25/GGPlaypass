@@ -1,37 +1,78 @@
+import React, { useState, useEffect } from 'react';
 import Countdown from './Countdown';
 import EmailForm from './EmailForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../LandingPage.css';
-import backgroundImg from '../background.jpg';
-import React, { useState, useEffect } from 'react';
+import backgroundImg from '../background.jpg'; // Your static background image
+import videoSrc from '../background-mobile.mp4'; // Path to your mobile video file
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const LandingPage = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Initialize AOS for animations
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  // Function to handle window resizing
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768); // Set mobile state based on width
+  };
+
+  useEffect(() => {
+    handleResize(); // Check initial size
+    window.addEventListener('resize', handleResize); // Update on resize
+    return () => {
+      window.removeEventListener('resize', handleResize); // Cleanup listener
+    };
+  }, []);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
   return (
     <div className="bg-dark text-light min-vh-100 d-flex flex-column">
-      {/* Header Section with Fullscreen Background */}
-      <header
-        className="text-center py-5 header-section"
-        data-aos="fade-up"
-        style={{
-          backgroundImage: `url(${backgroundImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          position: 'relative',
-          color: 'white',
-          height: '100vh', // Full viewport height
-        }}
-      >
+      {/* Header Section with Background */}
+      <header className="text-center py-5 header-section" data-aos="fade-up">
+        {isMobile ? (
+          // Video background for mobile
+          <video
+            autoPlay
+            loop
+            muted
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              zIndex: 0,
+            }}
+          >
+            <source src={videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          // Background image for desktop
+          <div
+            style={{
+              backgroundImage: `url(${backgroundImg})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              height: '100vh',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              zIndex: 0,
+            }}
+          />
+        )}
+        <div className="header-overlay" /> {/* Dark overlay */}
         <div style={{ position: 'relative', zIndex: 2, top: '50%', transform: 'translateY(-50%)' }}>
           <h1 className="display-4">LEVEL UP, EARN CRYPTO.</h1>
           <h2 className="lead">JOIN THE UNDERGROUND</h2>
@@ -41,7 +82,6 @@ const LandingPage = () => {
             </button>
           </div>
         </div>
-        <div className="header-overlay" />
       </header>
 
       {/* What is GG PlayPass Section */}
@@ -127,7 +167,7 @@ const LandingPage = () => {
       {isModalOpen && (
         <div className="modal fade show" style={{ display: 'block' }} onClick={closeModal}>
           <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-content bg-dark text-light rounded"> {/* Set background to dark */}
+            <div className="modal-content bg-dark text-light rounded">
               <div className="modal-header border-0 d-flex justify-content-between align-items-start">
                 <h5 className="modal-title">🚀 Subscribe to Our Email List</h5>
                 <button
