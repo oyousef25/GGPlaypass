@@ -3,7 +3,7 @@ import Countdown from './Countdown';
 import EmailForm from './EmailForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../LandingPage.css';
-import backgroundImg from '../background.jpg'; // Your static background image
+import backgroundImg from '../background.gif'; // Your static background image
 import videoSrc from '../background-mobile.mp4'; // Path to your mobile video file
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -74,7 +74,7 @@ const LandingPage = () => {
           />
         )}
         <div className="header-overlay" /> {/* Dark overlay */}
-        <div style={{ position: 'relative', zIndex: 2, top: '50%', transform: 'translateY(-50%)' }}>
+        <div style={{ position: 'relative', zIndex: 2, top: '55%', transform: 'translateY(-50%)' }}>
           <h1 className="display-4">LEVEL UP, EARN CRYPTO.</h1>
           <h2 className="lead">JOIN THE UNDERGROUND</h2>
           <div className="my-4">
